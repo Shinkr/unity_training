@@ -353,6 +353,7 @@
 "Assets/Scripts/Move_Left.cs"
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/Spawner.cs"
+"Assets/Scripts/Spawn_InFront.cs"
 -langversion:9.0
 
 /deterministic

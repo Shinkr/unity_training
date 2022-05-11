@@ -12,7 +12,8 @@ public class Player : MonoBehaviour // Collection of variables and functions tha
     private float horizontalInput;
     private Rigidbody rigidBodyComponent;
     private bool isGrounded;
-    private float speed = 0;
+    public float jumpHeight = 5;
+    public float moveSpeed = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +25,10 @@ public class Player : MonoBehaviour // Collection of variables and functions tha
     void Update()
     {
         // Check if Space is pressed down.
-        if (Input.GetKeyDown(KeyCode.Space) == true)
+        if (Input.GetKeyDown(KeyCode.Space) == true && isGrounded)
         {
             // Debug.Log("Space key was pressed down."); // Console.
             // Jumping Physics.
-            //GetComponent<Rigidbody>().AddForce(Vector3.up * 5, ForceMode.VelocityChange);
             jumpKeyWasPressed = true;
         }
 
@@ -36,18 +36,18 @@ public class Player : MonoBehaviour // Collection of variables and functions tha
         horizontalInput = Input.GetAxis("Horizontal");
 
         // Move the map to the left.
-        transform.position += Vector3.right * speed * Time.deltaTime;
+        // transform.position += Vector3.right * speed * Time.deltaTime;
 
+
+        // Left and right movement.
+        if (Input.GetKey(KeyCode.A))
         {
-            // if (Input.GetKey(KeyCode.A))
-            // {
-            //     GetComponent<Rigidbody>().AddForce(Vector3.left / 10, ForceMode.VelocityChange);
-            // }
-            // 
-            // if (Input.GetKey(KeyCode.D))
-            // {
-            //     GetComponent<Rigidbody>().AddForce(Vector3.right / 10, ForceMode.VelocityChange);
-            // }
+            GetComponent<Rigidbody>().AddForce(Vector3.left / moveSpeed, ForceMode.VelocityChange);
+        }
+        
+        if (Input.GetKey(KeyCode.D))
+        {
+            GetComponent<Rigidbody>().AddForce(Vector3.right / moveSpeed, ForceMode.VelocityChange);
         }
     }
 
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour // Collection of variables and functions tha
     {
        if (jumpKeyWasPressed == true)
         {
-            rigidBodyComponent.AddForce(Vector3.up * 5, ForceMode.VelocityChange);
+            rigidBodyComponent.AddForce(Vector3.up * jumpHeight, ForceMode.VelocityChange);
             jumpKeyWasPressed = false;
         }
 
